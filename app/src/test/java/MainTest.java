@@ -1,11 +1,15 @@
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 public class MainTest {
 
-    //@Test
+    @Test
     public void testSayHello() {
         Main main = new Main();
 
         String actual = main.sayHello("Dave");
 
-        assert actual.equals("Hello Dave");
+        assertEquals(actual, "Hello Dave");
     }
 }

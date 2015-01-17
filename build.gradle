@@ -1,4 +1,5 @@
 allprojects {
+    apply plugin: 'idea'
     task hello << { task -> println "I'm $task.project.name" }
 }
 
@@ -8,7 +9,19 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
 }
+
+
+project(':app') {
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.10'
+    }
+}
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'
