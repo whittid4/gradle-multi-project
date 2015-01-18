@@ -7,8 +7,7 @@ public class Main {
 
     public String sayHello(String name) {
         LOGGER.info("Saying hello to: %s", name);
-//        Concatenator concatenator = new Concatenator();
-//        return concatenator.concatenate("hello ", name);
-        return "Hello " + name;
+        Concatenator concatenator = new Concatenator();
+        return concatenator.concatenate("Hello", name);
     }
 }

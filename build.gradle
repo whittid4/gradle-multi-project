@@ -19,6 +19,7 @@ subprojects {
 project(':app') {
     dependencies {
         compile 'org.slf4j:slf4j-api:1.7.10'
+        compile project(':common')
     }
 }
 
