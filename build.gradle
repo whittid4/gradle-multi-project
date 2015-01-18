@@ -1,20 +1,27 @@
 allprojects {
     apply plugin: 'idea'
-    task hello << { task -> println "I'm $task.project.name" }
-}
-
-subprojects {
-    apply plugin: 'java'
+    apply plugin: 'jacoco'  // This needs to be applied at this level for some reason
 
     repositories {
         mavenCentral()
     }
 
+    task hello << { task -> println "I'm $task.project.name" }
+
+}
+
+subprojects {
+    apply plugin: 'java'
+
     dependencies {
         testCompile 'junit:junit:4.12'
     }
-}
 
+    // Turn off reporting for individual projects. If not turned off aggregate report fails
+    test {
+        reports.html.enabled = false
+    }
+}
 
 project(':app') {
     dependencies {
@@ -23,6 +30,30 @@ project(':app') {
     }
 }
 
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/tests")
+
+    // Include the results from the `test` task in all subprojects
+    reportOn subprojects*.test
+}
+
+task coverageReport(type: JacocoReport) {
+    dependsOn = subprojects.test
+
+    // Find the execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        html.enabled true
+        html.destination "${buildDir}/reports/jacoco"
+        csv.enabled false
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'
