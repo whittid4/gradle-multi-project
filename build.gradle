@@ -1,6 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.1'
+    }
+}
+
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'jacoco'  // This needs to be applied at this level for some reason
+    apply plugin: 'coveralls'
 
     repositories {
         mavenCentral()
