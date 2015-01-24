@@ -60,8 +60,9 @@ task coverageReport(type: JacocoReport) {
 
     reports {
         xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
         html.enabled true
-        html.destination "${buildDir}/reports/jacoco"
+        html.destination "${buildDir}/reports/jacoco/test/html"
         csv.enabled false
     }
 }
