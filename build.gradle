@@ -36,10 +36,29 @@ subprojects {
 
 project(':app') {
     apply plugin: 'war'
+    apply plugin: 'jetty'       // Embedded Jetty is preferred
 
     dependencies {
         compile 'org.slf4j:slf4j-api:1.7.10'
         compile project(':common')
+    }
+
+    jettyRun {
+        httpPort = 9000
+    }
+}
+
+project(':app2') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'       // Embedded Jetty is preferred
+
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.10'
+        compile project(':common')
+    }
+
+    jettyRun {
+        httpPort = 9001
     }
 }
 

@@ -19,4 +19,5 @@ include 'services:webservice'
 rootProject.name = 'gradle-multi-project'
 
 include 'app',
+        'app2',
         'common'
