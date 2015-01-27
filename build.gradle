@@ -35,6 +35,8 @@ subprojects {
 }
 
 project(':app') {
+    apply plugin: 'war'
+
     dependencies {
         compile 'org.slf4j:slf4j-api:1.7.10'
         compile project(':common')
@@ -42,6 +44,9 @@ project(':app') {
 }
 
 task testReport(type: TestReport) {
+    group = 'reports'
+    description = 'Creates a merged test report'
+
     destinationDir = file("$buildDir/reports/tests")
 
     // Include the results from the `test` task in all subprojects
@@ -49,6 +54,9 @@ task testReport(type: TestReport) {
 }
 
 task coverageReport(type: JacocoReport) {
+    group = 'reports'
+    description = 'Creates a merged coverage report'
+
     dependsOn = subprojects.test
 
     // Find the execution data from all subprojects
